@@ -1,6 +1,5 @@
 const GRID_WIDTH = 60;
 const GRID_HEIGHT = 40;
-let ctx;
 
 const main = () => {
   console.log("Welcome to pixelator!");
