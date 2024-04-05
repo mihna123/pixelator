@@ -1,7 +1,9 @@
 const GRID_WIDTH = 60;
 const GRID_HEIGHT = 40;
 const layers = [];
+let activeLayer = 0;
 let canvas;
+
 
 const main = () => {
   console.log("Welcome to pixelator!");
@@ -25,7 +27,7 @@ const canvasClick = (event) => {
   let gridX = getGridX(x);
   let gridY = getGridY(y);
 
-  layers[0].fillCell(gridX, gridY);
+  layers[activeLayer].fillCell(gridX, gridY);
 }
 
 const getGridX = (x) => {
