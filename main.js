@@ -14,7 +14,7 @@ const main = () => {
 
   canvas.addEventListener("mousedown", canvasClick);
   // draw once a second
-  const loop = setInterval(() => drawLoop(ctx), 1000);
+  setInterval(() => drawLoop(ctx), 1000);
 }
 
 const canvasClick = (event) => {
@@ -48,7 +48,9 @@ const drawLoop = (ctx) => {
     }
     for (var i = 0; i < layer.width; i++) {
       for (var j = 0; j < layer.height; j++) {
-        if (layer.cells[j * layer.width + i] === 1) {
+        const cell = layer.cells[j * layer.width + i];
+        if (cell.isDirty && cell.value === 1) {
+          cell.isDirty = false;
           ctx.fillRect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
         }
       }
@@ -59,14 +61,14 @@ const drawLoop = (ctx) => {
 class PixelLayer {
   width;
   height;
-  cells = [];
   active;
+  cells = [];
 
   constructor(width, height) {
     this.width = width;
     this.height = height;
     for (var i = 0; i < this.height * this.width; i++) {
-      this.cells[i] = 0;
+      this.cells[i] = { value: 0, isDirty: true };
     }
     this.active = false;
   }
@@ -76,7 +78,7 @@ class PixelLayer {
       return;
     }
     // TODO: Add color info eventualy
-    this.cells[x + y * this.width] = 1;
+    this.cells[x + y * this.width] = { value: 1, isDirty: true };
   }
 }
 
