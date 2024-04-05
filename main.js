@@ -1,4 +1,5 @@
-let canvas;
+const GRID_WIDTH = 60;
+const GRID_HEIGHT = 40;
 let ctx;
 
 const main = () => {
@@ -15,7 +16,20 @@ const canvasClick = (event) => {
   const x = event.clientX - bounds.left;
   const y = event.clientY - bounds.top;
 
-  ctx.fillRect(x - 5, y - 5, 10, 10);
+  let gridX = getGridX(x);
+  let gridY = getGridY(y);
+
+  ctx.fillRect(gridX, gridY, 10, 10);
+}
+
+const getGridX = (x) => {
+  const cellWidth = canvas.clientWidth / GRID_WIDTH;
+  return Math.floor(x / cellWidth) * cellWidth;
+}
+
+const getGridY = (y) => {
+  const cellHeight = canvas.clientHeight / GRID_HEIGHT;
+  return Math.floor(y / cellHeight) * cellHeight;
 }
 
 document.addEventListener("DOMContentLoaded", main)
