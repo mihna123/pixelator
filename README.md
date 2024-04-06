@@ -9,7 +9,7 @@ Features that i wish to implement:
 
 - [ ] Variable sprite size
 - [ ] Variable brush size
-- [ ] Colors
+- [X] Colors
 - [ ] Layers
 - [ ] Frames
 - [ ] Fill tool
