@@ -15,10 +15,11 @@ define("pixelLayer", () => {
       if (x < 0 || y < 0 || x > this.width || y > this.height) {
         return;
       }
-      this.cells[x + y * this.width] = {
-        value: this.colorPicker.value,
-        isDirty: true
-      };
+      const cell = this.cells[x + y * this.width];
+      if (cell.value != this.colorPicker.value) {
+        cell.value = this.colorPicker.value;
+        cell.isDirty = true;
+      }
     }
   }
 
