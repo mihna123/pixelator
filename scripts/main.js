@@ -1,5 +1,5 @@
-require(["pixelLayer", "shared", "constants", "events"],
-  (PixelLayer, shared, consts, events) => {
+require(["pixelLayer", "shared", "constants", "events", "mouseListener"],
+  (PixelLayer, shared, consts, events, MouseListener) => {
 
     console.log("Welcome to pixelator!");
 
@@ -8,6 +8,8 @@ require(["pixelLayer", "shared", "constants", "events"],
     const initLayer = new PixelLayer(consts.GRID_WIDTH, consts.GRID_HEIGHT);
     initLayer.active = true;
     shared.layers.push(initLayer);
+    const mouseListener = new MouseListener();
+    mouseListener.Listen();
 
     const drawLoop = (ctx, canvas) => {
       const cellWidth = canvas.clientWidth / consts.GRID_WIDTH;
@@ -30,8 +32,12 @@ require(["pixelLayer", "shared", "constants", "events"],
       });
     }
 
-    canvas.addEventListener("mousedown", (e) => events.canvasClick(e, canvas));
+    canvas.addEventListener("mousemove", (e) => {
+      if (mouseListener.mousePressed) {
+        events.canvasClick(e, canvas)
+      }
+    });
     // draw once a second
-    setInterval(() => drawLoop(ctx, canvas), 1000);
+    setInterval(() => drawLoop(ctx, canvas), 10);
   }
 );
