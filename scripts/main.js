@@ -1,87 +1,36 @@
-const GRID_WIDTH = 60;
-const GRID_HEIGHT = 40;
-const layers = [];
-let activeLayer = 0;
-let canvas;
+require(["pixelLayer", "shared", "constants", "events"],
+  (PixelLayer, shared, consts, events) => {
 
+    console.log("Welcome to pixelator!");
 
-const main = () => {
-  console.log("Welcome to pixelator!");
+    const canvas = document.getElementById("main-canvas");
+    const ctx = canvas.getContext("2d");
+    const initLayer = new PixelLayer(consts.GRID_WIDTH, consts.GRID_HEIGHT);
+    initLayer.active = true;
+    shared.layers.push(initLayer);
 
-  canvas = document.getElementById("main-canvas");
-  const ctx = canvas.getContext("2d");
-  const initLayer = new PixelLayer(GRID_WIDTH, GRID_HEIGHT);
-  initLayer.active = true;
-  layers.push(initLayer);
+    const drawLoop = (ctx, canvas) => {
+      const cellWidth = canvas.clientWidth / consts.GRID_WIDTH;
+      const cellHeight = canvas.clientHeight / consts.GRID_HEIGHT;
 
-  canvas.addEventListener("mousedown", canvasClick);
-  // draw once a second
-  setInterval(() => drawLoop(ctx), 1000);
-}
-
-const canvasClick = (event) => {
-  const bounds = canvas.getBoundingClientRect();
-  const x = event.clientX - bounds.left;
-  const y = event.clientY - bounds.top;
-
-  let gridX = getGridX(x);
-  let gridY = getGridY(y);
-
-  layers[activeLayer].fillCell(gridX, gridY);
-}
-
-const getGridX = (x) => {
-  const cellWidth = canvas.clientWidth / GRID_WIDTH;
-  return Math.floor(x / cellWidth);
-}
-
-const getGridY = (y) => {
-  const cellHeight = canvas.clientHeight / GRID_HEIGHT;
-  return Math.floor(y / cellHeight);
-}
-
-const drawLoop = (ctx) => {
-  const cellWidth = canvas.clientWidth / GRID_WIDTH;
-  const cellHeight = canvas.clientHeight / GRID_HEIGHT;
-
-  layers.forEach(layer => {
-    if (!layer.active) {
-      return;
-    }
-    for (var i = 0; i < layer.width; i++) {
-      for (var j = 0; j < layer.height; j++) {
-        const cell = layer.cells[j * layer.width + i];
-        if (cell.isDirty && cell.value === 1) {
-          cell.isDirty = false;
-          ctx.fillRect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
+      shared.layers.forEach(layer => {
+        if (!layer.active) {
+          return;
         }
-      }
+        for (var i = 0; i < layer.width; i++) {
+          for (var j = 0; j < layer.height; j++) {
+            const cell = layer.cells[j * layer.width + i];
+            if (cell.isDirty && cell.value === 1) {
+              cell.isDirty = false;
+              ctx.fillRect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
+            }
+          }
+        }
+      });
     }
-  });
-}
 
-class PixelLayer {
-  width;
-  height;
-  active;
-  cells = [];
-
-  constructor(width, height) {
-    this.width = width;
-    this.height = height;
-    for (var i = 0; i < this.height * this.width; i++) {
-      this.cells[i] = { value: 0, isDirty: true };
-    }
-    this.active = false;
+    canvas.addEventListener("mousedown", (e) => events.canvasClick(e, canvas));
+    // draw once a second
+    setInterval(() => drawLoop(ctx, canvas), 1000);
   }
-
-  fillCell(x, y) {
-    if (x < 0 || y < 0 || x > this.width || y > this.height) {
-      return;
-    }
-    // TODO: Add color info eventualy
-    this.cells[x + y * this.width] = { value: 1, isDirty: true };
-  }
-}
-
-document.addEventListener("DOMContentLoaded", main)
+);
