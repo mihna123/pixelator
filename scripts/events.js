@@ -1,4 +1,4 @@
-define("events", ["utils", "shared"], (utils, shared) => {
+define("events", ["utils", "shared", "brushes"], (utils, shared, brushes) => {
 
   return {
     canvasClick: (event, canvas) => {
@@ -8,8 +8,9 @@ define("events", ["utils", "shared"], (utils, shared) => {
 
       let gridX = utils.getGridX(x, canvas);
       let gridY = utils.getGridY(y, canvas);
+      const layer = shared.layers[shared.activeLayer];
 
-      shared.layers[shared.activeLayer].fillCell(gridX, gridY);
+      brushes.currentBrush.Draw(layer, gridX, gridY);
     }
   }
 });
