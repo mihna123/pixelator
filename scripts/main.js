@@ -20,8 +20,9 @@ require(["pixelLayer", "shared", "constants", "events"],
         for (var i = 0; i < layer.width; i++) {
           for (var j = 0; j < layer.height; j++) {
             const cell = layer.cells[j * layer.width + i];
-            if (cell.isDirty && cell.value === 1) {
+            if (cell.isDirty) {
               cell.isDirty = false;
+              ctx.fillStyle = cell.value;
               ctx.fillRect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
             }
           }

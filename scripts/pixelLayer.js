@@ -4,8 +4,9 @@ define("pixelLayer", () => {
       this.width = width;
       this.height = height;
       this.cells = [];
+      this.colorPicker = document.getElementById("color-picker");
       for (var i = 0; i < this.height * this.width; i++) {
-        this.cells[i] = { value: 0, isDirty: true };
+        this.cells[i] = { value: 0, isDirty: false };
       }
       this.active = false;
     }
@@ -14,8 +15,10 @@ define("pixelLayer", () => {
       if (x < 0 || y < 0 || x > this.width || y > this.height) {
         return;
       }
-      // TODO: Add color info eventualy
-      this.cells[x + y * this.width] = { value: 1, isDirty: true };
+      this.cells[x + y * this.width] = {
+        value: this.colorPicker.value,
+        isDirty: true
+      };
     }
   }
 
