@@ -1,9 +1,11 @@
-define("brushes", ["penBrush"], (PenBrush) => {
+define("brushes", ["penBrush", "bucketBrush"], (PenBrush, BucketBrush) => {
   const penBrush = new PenBrush();
-  let currentBrush = penBrush;
+  const bucketBrush = new BucketBrush();
+  let currentBrush = bucketBrush;
 
   return {
     penBrush: penBrush,
+    bucketBrush: bucketBrush,
     currentBrush: currentBrush
   }
 })
