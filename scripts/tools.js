@@ -1,11 +1,11 @@
 define("tools", ["penBrush", "bucketBrush"], (PenBrush, BucketBrush) => {
-  const penBrush = new PenBrush();
-  const bucketBrush = new BucketBrush();
-  let currentTool = bucketBrush;
-
-  return {
-    penBrush: penBrush,
-    bucketBrush: bucketBrush,
-    currentTool: currentTool
+  class Tools {
+    constructor(mouseListener) {
+      this.penBrush = new PenBrush(mouseListener);
+      this.bucketBrush = new BucketBrush(mouseListener);
+      this.currentTool = this.penBrush;
+    }
   }
-})
+
+  return Tools;
+});

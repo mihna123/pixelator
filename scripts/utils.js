@@ -9,8 +9,19 @@ define("utils", ["constants"], (constants) => {
     return Math.floor(y / cellHeight);
   }
 
+  const getEventXY = (e, canvas) => {
+    const bounds = canvas.getBoundingClientRect();
+    const x = e.clientX - bounds.left;
+    const y = e.clientY - bounds.top;
+
+    let gridX = getGridX(x, canvas);
+    let gridY = getGridY(y, canvas);
+    return [gridX, gridY];
+  }
+
   return {
     getGridX: getGridX,
     getGridY: getGridY,
+    getEventXY: getEventXY
   }
 });

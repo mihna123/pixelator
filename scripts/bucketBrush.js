@@ -1,5 +1,18 @@
-define("bucketBrush", () => {
+define("bucketBrush", ["utils", "shared"], (utils, shared) => {
   class BucketBrush {
+    constructor(mouseListener) {
+      this.mouseListener = mouseListener;
+    }
+
+    SetEvents() {
+      this.mouseListener.ClearEvents();
+      this.mouseListener.SetOnMouseClick((e) => {
+        const [gridX, gridY] = utils.getEventXY(e, this.mouseListener.canvas);
+        const layer = shared.layers[shared.activeLayer];
+        this.Draw(layer, gridX, gridY);
+      });
+
+    }
     // TODO: optimize this is very bad
     Draw(layer, x, y) {
       const initVal = layer.cells[x + y * layer.width].value;
