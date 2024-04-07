@@ -1,4 +1,4 @@
-define("utils", ["constants", "shared"], (constants, shared) => {
+define("utils", ["constants"], (constants) => {
   const getGridX = (x, canvas) => {
     const cellWidth = canvas.clientWidth / constants.GRID_WIDTH;
     return Math.floor(x / cellWidth);
