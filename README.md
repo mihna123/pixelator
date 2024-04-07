@@ -14,8 +14,9 @@ Features that i wish to implement:
 - [ ] Frames
 - [X] Bucket Fill tool
 - [ ] Select tool
-- [ ] Line tool
+- [X] Line tool
 - [ ] Circle tool
 - [ ] Move tool
 - [ ] Color pick tool
+- [ ] Undo/Redo
 
