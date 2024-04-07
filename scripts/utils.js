@@ -1,4 +1,4 @@
-define("utils", ["constants", "shared"], (constants, shared) => {
+define("utils", ["constants"], (constants) => {
   const getGridX = (x, canvas) => {
     const cellWidth = canvas.clientWidth / constants.GRID_WIDTH;
     return Math.floor(x / cellWidth);
@@ -12,15 +12,5 @@ define("utils", ["constants", "shared"], (constants, shared) => {
   return {
     getGridX: getGridX,
     getGridY: getGridY,
-    canvasClick: (event, canvas) => {
-      const bounds = canvas.getBoundingClientRect();
-      const x = event.clientX - bounds.left;
-      const y = event.clientY - bounds.top;
-
-      let gridX = getGridX(x, canvas);
-      let gridY = getGridY(y, canvas);
-
-      shared.layers[shared.activeLayer].fillCell(gridX, gridY);
-    }
   }
 });
