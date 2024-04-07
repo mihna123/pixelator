@@ -11,7 +11,7 @@ define("events", ["utils", "shared", "tools"],
         let gridY = utils.getGridY(y, canvas);
         const layer = shared.layers[shared.activeLayer];
 
-        tools.currentBrush.Draw(layer, gridX, gridY);
+        tools.currentTool.Draw(layer, gridX, gridY);
       }
     }
   });

@@ -15,10 +15,10 @@ require(["pixelLayer", "shared", "constants", "events", "mouseListener", "tools"
     const bucketBrushBtn = document.getElementById("bucket-btn");
 
     penBrushBtn.addEventListener("click", () =>
-      tools.currentBrush = tools.penBrush);
+      tools.currentTool = tools.penBrush);
 
     bucketBrushBtn.addEventListener("click", () =>
-      tools.currentBrush = tools.bucketBrush);
+      tools.currentTool = tools.bucketBrush);
 
     const drawLoop = (ctx, canvas) => {
       const cellWidth = canvas.clientWidth / consts.GRID_WIDTH;
