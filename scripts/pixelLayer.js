@@ -16,6 +16,9 @@ define("pixelLayer", () => {
         return;
       }
       const cell = this.cells[x + y * this.width];
+      if (cell === undefined) {
+        return;
+      }
       if (cell.value != this.colorPicker.value) {
         cell.value = this.colorPicker.value;
         cell.isDirty = true;

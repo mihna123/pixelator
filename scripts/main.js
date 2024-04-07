@@ -16,6 +16,7 @@ require(["pixelLayer", "shared", "constants", "mouseListener", "tools"],
     const penBrushBtn = document.getElementById("pen-btn");
     const bucketBrushBtn = document.getElementById("bucket-btn");
     const lineToolBtn = document.getElementById("line-btn");
+    const circleToolBtn = document.getElementById("circle-btn");
 
     penBrushBtn.addEventListener("click", () => {
       tools.currentTool = tools.penBrush;
@@ -29,6 +30,11 @@ require(["pixelLayer", "shared", "constants", "mouseListener", "tools"],
 
     lineToolBtn.addEventListener("click", () => {
       tools.currentTool = tools.lineTool;
+      tools.currentTool.SetEvents();
+    });
+
+    circleToolBtn.addEventListener("click", () => {
+      tools.currentTool = tools.circleTool;
       tools.currentTool.SetEvents();
     });
 
