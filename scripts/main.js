@@ -1,24 +1,36 @@
-require(["pixelLayer", "shared", "constants", "events", "mouseListener", "brushes"],
-  (PixelLayer, shared, consts, events, MouseListener, brushes) => {
-
+require(["pixelLayer", "shared", "constants", "mouseListener", "tools"],
+  (PixelLayer, shared, consts, MouseListener, Tools) => {
     console.log("Welcome to pixelator!");
 
     const canvas = document.getElementById("main-canvas");
     const ctx = canvas.getContext("2d");
     const initLayer = new PixelLayer(consts.GRID_WIDTH, consts.GRID_HEIGHT);
     initLayer.active = true;
+
     shared.layers.push(initLayer);
-    const mouseListener = new MouseListener();
+    const mouseListener = new MouseListener(canvas);
     mouseListener.Listen();
+
+    const tools = new Tools(mouseListener);
 
     const penBrushBtn = document.getElementById("pen-btn");
     const bucketBrushBtn = document.getElementById("bucket-btn");
+    const lineToolBtn = document.getElementById("line-btn");
 
-    penBrushBtn.addEventListener("click", () =>
-      brushes.currentBrush = brushes.penBrush);
+    penBrushBtn.addEventListener("click", () => {
+      tools.currentTool = tools.penBrush;
+      tools.currentTool.SetEvents();
+    });
 
-    bucketBrushBtn.addEventListener("click", () =>
-      brushes.currentBrush = brushes.bucketBrush);
+    bucketBrushBtn.addEventListener("click", () => {
+      tools.currentTool = tools.bucketBrush;
+      tools.currentTool.SetEvents();
+    });
+
+    lineToolBtn.addEventListener("click", () => {
+      tools.currentTool = tools.lineTool;
+      tools.currentTool.SetEvents();
+    });
 
     const drawLoop = (ctx, canvas) => {
       const cellWidth = canvas.clientWidth / consts.GRID_WIDTH;
@@ -41,15 +53,6 @@ require(["pixelLayer", "shared", "constants", "events", "mouseListener", "brushe
       });
     }
 
-    canvas.addEventListener("mousemove", (e) => {
-      if (mouseListener.mousePressed) {
-        events.canvasClick(e, canvas)
-      }
-    });
-    canvas.addEventListener("mousedown", (e) => {
-      events.canvasClick(e, canvas)
-    });
-    // draw once a second
     setInterval(() => drawLoop(ctx, canvas), 10);
   }
 );

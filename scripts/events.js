@@ -1,5 +1,5 @@
-define("events", ["utils", "shared", "brushes"],
-  (utils, shared, brushes) => {
+define("events", ["utils", "shared", "tools"],
+  (utils, shared, tools) => {
 
     return {
       canvasClick: (event, canvas) => {
@@ -11,7 +11,7 @@ define("events", ["utils", "shared", "brushes"],
         let gridY = utils.getGridY(y, canvas);
         const layer = shared.layers[shared.activeLayer];
 
-        brushes.currentBrush.Draw(layer, gridX, gridY);
+        tools.currentTool.Draw(layer, gridX, gridY);
       }
     }
   });
