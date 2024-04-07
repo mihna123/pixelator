@@ -3,6 +3,7 @@ define("mouseListener", () => {
     constructor(canvas) {
       this.mousePressed = false;
       this.onMouseDownAndMoving = (e) => { };
+      this.onMouseDown = (e) => { };
       this.onMouseReleased = (e) => { };
       this.onMouseClick = (e) => { };
       this.canvas = canvas;
@@ -19,6 +20,9 @@ define("mouseListener", () => {
           this.onMouseDownAndMoving(e);
         }
       });
+      this.canvas.addEventListener("mousedown", (e) => {
+        this.onMouseDown(e);
+      });
       this.canvas.addEventListener("click", (e) => {
         this.onMouseClick(e);
       });
@@ -30,6 +34,9 @@ define("mouseListener", () => {
     SetOnMouseDownAndMoving(func) {
       this.onMouseDownAndMoving = func;
     }
+    SetOnMouseDown(func) {
+      this.onMouseDown = func;
+    }
     SetOnMouseReleased(func) {
       this.onMouseReleased = func;
     }
@@ -39,6 +46,7 @@ define("mouseListener", () => {
 
     ClearEvents() {
       this.onMouseDownAndMoving = (e) => { };
+      this.onMouseDown = (e) => { };
       this.onMouseReleased = (e) => { };
       this.onMouseClick = (e) => { };
     }

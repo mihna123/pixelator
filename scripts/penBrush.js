@@ -12,6 +12,11 @@ define("penBrush", ["utils", "shared"], (utils, shared) => {
         const layer = shared.layers[shared.activeLayer];
         this.Draw(layer, gridX, gridY);
       });
+      this.mouseListener.SetOnMouseClick((e) => {
+        const [gridX, gridY] = utils.getEventXY(e, this.mouseListener.canvas);
+        const layer = shared.layers[shared.activeLayer];
+        this.Draw(layer, gridX, gridY);
+      });
     }
 
     Draw(layer, x, y) {

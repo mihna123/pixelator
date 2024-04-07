@@ -15,6 +15,7 @@ require(["pixelLayer", "shared", "constants", "mouseListener", "tools"],
 
     const penBrushBtn = document.getElementById("pen-btn");
     const bucketBrushBtn = document.getElementById("bucket-btn");
+    const lineToolBtn = document.getElementById("line-btn");
 
     penBrushBtn.addEventListener("click", () => {
       tools.currentTool = tools.penBrush;
@@ -23,6 +24,11 @@ require(["pixelLayer", "shared", "constants", "mouseListener", "tools"],
 
     bucketBrushBtn.addEventListener("click", () => {
       tools.currentTool = tools.bucketBrush;
+      tools.currentTool.SetEvents();
+    });
+
+    lineToolBtn.addEventListener("click", () => {
+      tools.currentTool = tools.lineTool;
       tools.currentTool.SetEvents();
     });
 
@@ -46,7 +52,7 @@ require(["pixelLayer", "shared", "constants", "mouseListener", "tools"],
         }
       });
     }
-    // draw once a second
+
     setInterval(() => drawLoop(ctx, canvas), 10);
   }
 );
