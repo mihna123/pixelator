@@ -12,7 +12,7 @@ Features that i wish to implement:
 - [X] Colors
 - [ ] Layers
 - [ ] Frames
-- [ ] Fill tool
+- [X] Bucket Fill tool
 - [ ] Select tool
 - [ ] Line tool
 
