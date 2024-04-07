@@ -1,5 +1,5 @@
-require(["pixelLayer", "shared", "constants", "events", "mouseListener", "brushes"],
-  (PixelLayer, shared, consts, events, MouseListener, brushes) => {
+require(["pixelLayer", "shared", "constants", "events", "mouseListener", "tools"],
+  (PixelLayer, shared, consts, events, MouseListener, tools) => {
 
     console.log("Welcome to pixelator!");
 
@@ -15,10 +15,10 @@ require(["pixelLayer", "shared", "constants", "events", "mouseListener", "brushe
     const bucketBrushBtn = document.getElementById("bucket-btn");
 
     penBrushBtn.addEventListener("click", () =>
-      brushes.currentBrush = brushes.penBrush);
+      tools.currentBrush = tools.penBrush);
 
     bucketBrushBtn.addEventListener("click", () =>
-      brushes.currentBrush = brushes.bucketBrush);
+      tools.currentBrush = tools.bucketBrush);
 
     const drawLoop = (ctx, canvas) => {
       const cellWidth = canvas.clientWidth / consts.GRID_WIDTH;

@@ -1,4 +1,4 @@
-define("brushes", ["penBrush", "bucketBrush"], (PenBrush, BucketBrush) => {
+define("tools", ["penBrush", "bucketBrush"], (PenBrush, BucketBrush) => {
   const penBrush = new PenBrush();
   const bucketBrush = new BucketBrush();
   let currentBrush = bucketBrush;
