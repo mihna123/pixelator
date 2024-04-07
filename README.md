@@ -15,4 +15,7 @@ Features that i wish to implement:
 - [X] Bucket Fill tool
 - [ ] Select tool
 - [ ] Line tool
+- [ ] Circle tool
+- [ ] Move tool
+- [ ] Color pick tool
 
