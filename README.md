@@ -7,7 +7,7 @@ ispiration from the likes of [Piskelapp](https://www.piskelapp.com/) and such
 
 Features that i wish to implement:
 
-- [ ] Variable sprite size
+- [X] Variable sprite size
 - [ ] Variable brush size
 - [X] Colors
 - [ ] Layers
