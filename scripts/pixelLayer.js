@@ -1,8 +1,8 @@
 define("pixelLayer", () => {
   class PixelLayer {
-    constructor(width, height) {
-      this.width = width;
-      this.height = height;
+    constructor() {
+      this.width = Number(document.getElementById("width-input").value);
+      this.height = Number(document.getElementById("height-input").value);
       this.cells = [];
       this.colorPicker = document.getElementById("color-picker");
       for (var i = 0; i < this.height * this.width; i++) {

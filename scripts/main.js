@@ -3,8 +3,10 @@ require(["pixelLayer", "shared", "constants", "mouseListener", "tools"],
     console.log("Welcome to pixelator!");
 
     const canvas = document.getElementById("main-canvas");
+    const gridWidth = Number(document.getElementById("width-input").value);
+    const gridHeight = Number(document.getElementById("height-input").value);
     const ctx = canvas.getContext("2d");
-    const initLayer = new PixelLayer(consts.GRID_WIDTH, consts.GRID_HEIGHT);
+    const initLayer = new PixelLayer();
     initLayer.active = true;
 
     shared.layers.push(initLayer);
@@ -45,8 +47,8 @@ require(["pixelLayer", "shared", "constants", "mouseListener", "tools"],
     });
 
     const drawLoop = (ctx, canvas) => {
-      const cellWidth = canvas.clientWidth / consts.GRID_WIDTH;
-      const cellHeight = canvas.clientHeight / consts.GRID_HEIGHT;
+      const cellWidth = canvas.clientWidth / gridWidth;
+      const cellHeight = canvas.clientHeight / gridHeight;
 
       shared.layers.forEach(layer => {
         if (!layer.active) {
