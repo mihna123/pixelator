@@ -21,10 +21,14 @@
   <button id="line-btn">Line</button>
   <button id="circle-btn">Circle</button>
   <button id="move-btn">Move</button>
-  <form>
-    <input type="number" id="width-input" value="32"></input>
-    <input type="number" id="height-input" value="32"></input>
-    <button type="button" id="size-btn">Set size</button>
+  <button id="new-btn">New Sprite</button><br />
+  <form id="new-sprite-form">
+    Width:
+    <input type="number" id="width-input" value="32"></input><br />
+    Height:
+    <input type="number" id="height-input" value="32"></input><br />
+    <button type="button" id="new-sprite-btn">Create sprite</button>
+    <button type="button" id="cancel-new-btn">Cancel</button>
   </form>
   <canvas id="main-canvas" width="600" height="400">
     Sorry, your browser does not support the canvas element

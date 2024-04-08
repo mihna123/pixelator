@@ -1,10 +1,11 @@
-require(["pixelLayer", "shared", "constants", "mouseListener", "tools"],
-  (PixelLayer, shared, consts, MouseListener, Tools) => {
+require(["pixelLayer", "shared", "mouseListener", "tools"],
+  (PixelLayer, shared, MouseListener, Tools) => {
     console.log("Welcome to pixelator!");
 
     const canvas = document.getElementById("main-canvas");
     const gridWidth = Number(document.getElementById("width-input").value);
     const gridHeight = Number(document.getElementById("height-input").value);
+    canvas.width = canvas.height * (gridWidth / gridHeight);
     const ctx = canvas.getContext("2d");
     const initLayer = new PixelLayer();
     initLayer.active = true;
@@ -20,6 +21,24 @@ require(["pixelLayer", "shared", "constants", "mouseListener", "tools"],
     const lineToolBtn = document.getElementById("line-btn");
     const circleToolBtn = document.getElementById("circle-btn");
     const moveToolBtn = document.getElementById("move-btn");
+    const newBtn = document.getElementById("new-btn");
+    const newSpriteForm = document.getElementById("new-sprite-form");
+    const newSpriteBtn = document.getElementById("new-sprite-btn");
+    const cancelSpriteBtn = document.getElementById("cancel-new-btn");
+
+    cancelSpriteBtn.addEventListener("click", () => {
+      newSpriteForm.style["display"] = "none";
+    });
+
+    newSpriteBtn.addEventListener("click", () => {
+      if (confirm("You will lose your current sprite")) {
+        window.location.reload();
+      }
+    });
+
+    newBtn.addEventListener("click", () => {
+      newSpriteForm.style["display"] = "initial";
+    });
 
     penBrushBtn.addEventListener("click", () => {
       tools.currentTool = tools.penBrush;

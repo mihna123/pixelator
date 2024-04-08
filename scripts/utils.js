@@ -1,4 +1,4 @@
-define("utils", ["constants"], () => {
+define("utils", () => {
 
   const gridWidth = Number(document.getElementById("width-input").value);
   const gridHeight = Number(document.getElementById("height-input").value);
