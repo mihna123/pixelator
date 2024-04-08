@@ -1,4 +1,5 @@
-define("tools", ["penBrush", "bucketBrush", "lineTool", "circleTool"],
+define("tools", ["tools/penBrush", "tools/bucketBrush",
+  "tools/lineTool", "tools/circleTool"],
   (PenBrush, BucketBrush, LineTool, CircleTool) => {
     class Tools {
       constructor(mouseListener) {

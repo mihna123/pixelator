@@ -1,4 +1,4 @@
-define("penBrush", ["utils", "shared"], (utils, shared) => {
+define(["utils", "shared"], (utils, shared) => {
   class PenBrush {
     constructor(mouseListener) {
       this.mouseListener = mouseListener;

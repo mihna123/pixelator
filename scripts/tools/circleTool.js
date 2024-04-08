@@ -1,4 +1,4 @@
-define("circleTool", ["shared", "utils"], (shared, utils) => {
+define(["shared", "utils"], (shared, utils) => {
   return class CircleTool {
     constructor(mouseListener) {
       this.mouseListener = mouseListener;

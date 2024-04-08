@@ -1,4 +1,4 @@
-define("lineTool", ["shared", "utils"], (shared, utils) => {
+define(["shared", "utils"], (shared, utils) => {
   return class LineTool {
     constructor(mouseListener) {
       this.mouseListener = mouseListener;
