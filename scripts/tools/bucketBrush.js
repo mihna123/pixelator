@@ -1,4 +1,4 @@
-define("bucketBrush", ["utils", "shared"], (utils, shared) => {
+define(["utils", "shared"], (utils, shared) => {
   class BucketBrush {
     constructor(mouseListener) {
       this.mouseListener = mouseListener;
