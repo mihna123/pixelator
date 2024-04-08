@@ -16,7 +16,7 @@ Features that i wish to implement:
 - [ ] Select tool
 - [X] Line tool
 - [X] Circle tool
-- [ ] Move tool
+- [X] Move tool
 - [ ] Color pick tool
 - [ ] Undo/Redo
 
