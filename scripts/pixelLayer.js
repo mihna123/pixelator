@@ -6,7 +6,7 @@ define("pixelLayer", () => {
       this.cells = [];
       this.colorPicker = document.getElementById("color-picker");
       for (var i = 0; i < this.height * this.width; i++) {
-        this.cells[i] = { value: 0, isDirty: false };
+        this.cells[i] = { value: "#ffffffff", isDirty: false };
       }
       this.active = false;
     }
