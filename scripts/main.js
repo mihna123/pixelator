@@ -21,10 +21,12 @@ require(["pixelLayer", "shared", "mouseListener", "tools"],
     const lineToolBtn = document.getElementById("line-btn");
     const circleToolBtn = document.getElementById("circle-btn");
     const moveToolBtn = document.getElementById("move-btn");
+    const selectToolBtn = document.getElementById("select-btn");
     const newBtn = document.getElementById("new-btn");
     const newSpriteForm = document.getElementById("new-sprite-form");
     const newSpriteBtn = document.getElementById("new-sprite-btn");
     const cancelSpriteBtn = document.getElementById("cancel-new-btn");
+
 
     cancelSpriteBtn.addEventListener("click", () => {
       newSpriteForm.style["display"] = "none";
@@ -38,6 +40,11 @@ require(["pixelLayer", "shared", "mouseListener", "tools"],
 
     newBtn.addEventListener("click", () => {
       newSpriteForm.style["display"] = "initial";
+    });
+
+    selectToolBtn.addEventListener("click", () => {
+      tools.currentTool = tools.selectTool;
+      tools.currentTool.SetEvents();
     });
 
     penBrushBtn.addEventListener("click", () => {

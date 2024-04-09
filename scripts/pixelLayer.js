@@ -9,6 +9,7 @@ define("pixelLayer", () => {
         this.cells[i] = { value: "#ffffffff", isDirty: false };
       }
       this.active = false;
+      this.offset = [0, 0];
     }
 
     fillCell(x, y) {
@@ -23,6 +24,11 @@ define("pixelLayer", () => {
         cell.value = this.colorPicker.value;
         cell.isDirty = true;
       }
+    }
+
+    SetSize(w, h) {
+      this.width = w;
+      this.height = h;
     }
   }
 
