@@ -17,19 +17,19 @@ define(["shared", "utils", "pixelLayer"], (shared, utils, PixelLayer) => {
         this.endXY = utils.getEventXY(e, this.mouseListener.canvas);
 
         // Making sure that start is top left corner and end is bottom right
-        const [x1, x2] = this.startXY[0] > this.endXY[0]
+        const [x1, x2] = this.startXY[0] < this.endXY[0]
           ? [this.startXY[0], this.endXY[0]]
           : [this.endXY[0], this.startXY[0]];
-        const [y1, y2] = this.startXY[1] > this.endXY[1]
+        const [y1, y2] = this.startXY[1] < this.endXY[1]
           ? [this.startXY[1], this.endXY[1]]
           : [this.endXY[1], this.startXY[1]];
         this.startXY = [x1, y1];
         this.endXY = [x2, y2];
-        this.selection.offset = [x1, x2];
-
+        this.selection.offset = [x1, y1];
         const width = this.endXY[0] - this.startXY[0];
         const height = this.endXY[1] - this.startXY[1];
         this.selection.SetSize(width, height);
+        console.log(this.selection);
 
         this.fillSelection();
         this.selection.active = true;
