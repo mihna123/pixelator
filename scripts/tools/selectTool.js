@@ -25,10 +25,6 @@ define(["shared", "utils", "pixelLayer"], (shared, utils, PixelLayer) => {
           : [this.endXY[1], this.startXY[1]];
         this.startXY = [x1, y1];
         this.endXY = [x2, y2];
-        this.selection.offset = [x1, y1];
-        const width = this.endXY[0] - this.startXY[0];
-        const height = this.endXY[1] - this.startXY[1];
-        this.selection.SetSize(width, height);
         console.log(this.selection);
 
         this.fillSelection();
@@ -44,13 +40,13 @@ define(["shared", "utils", "pixelLayer"], (shared, utils, PixelLayer) => {
 
     fillSelection() {
       const layer = shared.layers[shared.activeLayer];
-      for (let i = 0; i < this.selection.width; i++) {
-        for (let j = 0; j < this.selection.height; j++) {
-          const selCor = i + j * this.selection.width;
-          const layCor = this.startXY[0] + i + (this.startXY[1] + j) * layer.width;
-
-          const selCell = this.selection.cells[selCor];
-          const layCell = layer.cells[layCor];
+      const [startX, endX] = [this.startXY[0], this.endXY[0]];
+      const [startY, endY] = [this.startXY[1], this.endXY[1]];
+      for (let i = startX; i < endX; i++) {
+        for (let j = startY; j < endY; j++) {
+          const cor = i + j * layer.width;
+          const selCell = this.selection.cells[cor];
+          const layCell = layer.cells[cor];
           selCell.value = layCell.value;
           selCell.isDirty = false;
         }
@@ -65,10 +61,11 @@ define(["shared", "utils", "pixelLayer"], (shared, utils, PixelLayer) => {
       const cellHeight = canvas.clientHeight / gridHeight;
       const ctx = canvas.getContext("2d");
       ctx.fillStyle = "#000000ff";
-      const [x, y] = this.startXY;
+      const [x1, y1] = this.startXY;
+      const [x2, y2] = this.endXY;
 
-      ctx.strokeRect(x * cellWidth, y * cellHeight,
-        this.selection.width * cellWidth, this.selection.height * cellHeight);
+      ctx.strokeRect(x1 * cellWidth, y1 * cellHeight,
+        (x2 - x1) * cellWidth, (y2 - y1) * cellHeight);
     }
   }
   return SelectTool;

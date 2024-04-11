@@ -86,6 +86,7 @@ require(["pixelLayer", "shared", "mouseListener", "tools"],
             if (cell.isDirty) {
               cell.isDirty = false;
               ctx.fillStyle = cell.value;
+              ctx.strokeStyle = cell.value;
               ctx.fillRect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
             }
           }
