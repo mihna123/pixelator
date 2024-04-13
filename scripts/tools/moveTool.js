@@ -18,6 +18,9 @@ define(["utils", "shared"], (utils, shared) => {
         // dir is vec2 - vec1 
         const dir = [this.endXY[0] - this.startXY[0],
         this.endXY[1] - this.startXY[1]];
+        if (dir[0] == 0 && dir[1] === 0) {
+          return;
+        }
         // Iterate all pixels
         // Determine the iteration order based on the direction
         const [start, end, step] = (dir[1] <= 0 && dir[0] <= 0)
@@ -42,21 +45,35 @@ define(["utils", "shared"], (utils, shared) => {
         }
 
         // Clean up old cells
-        const remStart = Math.abs(start - (layer.cells.length - 1));
-        const remEnd = Math.abs(end - (layer.cells.length - 1)) - 1;
-        const remStep = -step;
-        for (let i = remStart; i !== remEnd; i += remStep) {
-          const x = i % layer.width;
-          const y = Math.floor(i / layer.width);
-          const shouldRemove = remStep > 0
-            ? x < dir[0] || y < dir[1]
-            : x > layer.width + dir[0] - 1 || y > layer.height + dir[1] - 1;
-          if (shouldRemove) {
-            layer.cells[x + y * layer.width].value = "#ffffffff";
-            layer.cells[x + y * layer.width].isDirty = true;
-          }
-          if (i >= layer.cells.length || i < 0) {
-            break;
+        const delPoinX = (dir[0] + layer.width) % layer.width;
+        const delPoinY = (dir[1] + layer.height) % layer.height;
+        let shouldRemove; //= 
+        if (dir[0] >= 0 && dir[1] < 0) {
+          shouldRemove = (i, j) => (i < delPoinX) || (j >= delPoinY);
+        }
+        else if (dir[0] > 0 && dir[1] >= 0) {
+          shouldRemove = (i, j) => (i < delPoinX) || (j < delPoinY);
+        }
+        else if (dir[0] < 0 && dir[1] > 0) {
+          shouldRemove = (i, j) => (i >= delPoinX) || (j < delPoinY);
+        }
+        else if (dir[0] < 0 && dir[1] < 0) {
+          shouldRemove = (i, j) => (i >= delPoinX) || (j >= delPoinY);
+        }
+        else if (dir[0] < 0 && dir[1] === 0) {
+          shouldRemove = (i, _) => (i >= delPoinX);
+        }
+        else if (dir[0] === 0 && dir[1] > 0) {
+          shouldRemove = (_, j) => (j <= delPoinY);
+        }
+        console.log({ delPoinX, delPoinY, dir });
+        for (let i = 0; i < layer.width; i++) {
+          for (let j = 0; j < layer.height; j++) {
+            if (shouldRemove(i, j)) {
+              // TODO removing val should be cell value of the layer maybe
+              layer.cells[i + j * layer.width].value = "#00000000";
+              layer.cells[i + j * layer.width].isDirty = true;
+            }
           }
         }
       });
