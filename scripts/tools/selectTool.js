@@ -25,7 +25,6 @@ define(["shared", "utils", "pixelLayer"], (shared, utils, PixelLayer) => {
           : [this.endXY[1], this.startXY[1]];
         this.startXY = [x1, y1];
         this.endXY = [x2, y2];
-        console.log(this.selection);
 
         this.fillSelection();
         this.selection.active = true;
@@ -54,7 +53,6 @@ define(["shared", "utils", "pixelLayer"], (shared, utils, PixelLayer) => {
           const layCell = layer.cells[cor];
           selCell.value = layCell.value;
           selCell.isDirty = false;
-          console.log("val");
         }
       }
     }

@@ -66,7 +66,6 @@ define(["utils", "shared"], (utils, shared) => {
         else if (dir[0] === 0 && dir[1] > 0) {
           shouldRemove = (_, j) => (j <= delPoinY);
         }
-        console.log({ delPoinX, delPoinY, dir });
         for (let i = 0; i < layer.width; i++) {
           for (let j = 0; j < layer.height; j++) {
             if (shouldRemove(i, j)) {
