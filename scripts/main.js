@@ -85,6 +85,10 @@ require(["pixelLayer", "shared", "mouseListener", "tools"],
             const cell = layer.cells[j * layer.width + i];
             if (cell.isDirty) {
               cell.isDirty = false;
+              if (cell.value === "#00000000") {
+                ctx.clearRect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
+                continue;
+              }
               ctx.fillStyle = cell.value;
               ctx.strokeStyle = cell.value;
               ctx.fillRect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
