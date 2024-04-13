@@ -85,6 +85,9 @@ require(["pixelLayer", "shared", "mouseListener", "tools"],
             const cell = layer.cells[j * layer.width + i];
             if (cell.isDirty) {
               cell.isDirty = false;
+              if (cell.value === -1) {
+                continue;
+              }
               if (cell.value === "#00000000") {
                 ctx.clearRect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
                 continue;
