@@ -40,15 +40,21 @@ define(["shared", "utils", "pixelLayer"], (shared, utils, PixelLayer) => {
 
     fillSelection() {
       const layer = shared.layers[shared.activeLayer];
+      const [width, height] = [layer.width, layer.height];
       const [startX, endX] = [this.startXY[0], this.endXY[0]];
       const [startY, endY] = [this.startXY[1], this.endXY[1]];
-      for (let i = startX; i < endX; i++) {
-        for (let j = startY; j < endY; j++) {
-          const cor = i + j * layer.width;
+      for (let i = 0; i < width; i++) {
+        for (let j = 0; j < height; j++) {
+          const cor = i + j * width;
           const selCell = this.selection.cells[cor];
+          if (i < startX || i > endX || j < startY || j > endY) {
+            selCell.value = -1;
+            continue;
+          }
           const layCell = layer.cells[cor];
           selCell.value = layCell.value;
           selCell.isDirty = false;
+          console.log("val");
         }
       }
     }
