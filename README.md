@@ -19,4 +19,5 @@ Features that i wish to implement:
 - [X] Move tool
 - [ ] Color pick tool
 - [ ] Undo/Redo
+- [ ] Save to png
 
