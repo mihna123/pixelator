@@ -1,5 +1,5 @@
-require(["pixelLayer", "shared", "mouseListener", "tools"],
-  (PixelLayer, shared, MouseListener, Tools) => {
+require(["pixelLayer", "shared", "mouseListener", "tools", "utils"],
+  (PixelLayer, shared, MouseListener, Tools, utils) => {
     console.log("Welcome to pixelator!");
 
     const canvas = document.getElementById("main-canvas");
@@ -26,10 +26,25 @@ require(["pixelLayer", "shared", "mouseListener", "tools"],
     const newSpriteForm = document.getElementById("new-sprite-form");
     const newSpriteBtn = document.getElementById("new-sprite-btn");
     const cancelSpriteBtn = document.getElementById("cancel-new-btn");
+    const downloadBtn = document.getElementById("download-btn");
 
 
     cancelSpriteBtn.addEventListener("click", () => {
       newSpriteForm.style["display"] = "none";
+    });
+
+    downloadBtn.addEventListener("click", () => {
+      const blob = utils.getPngBlob();
+      const downloadUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = downloadUrl;
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.download = "unnamed-sprite.png";
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(downloadUrl);
+      console.log(downloadUrl);
     });
 
     newSpriteBtn.addEventListener("click", () => {
