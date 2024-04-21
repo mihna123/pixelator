@@ -1,4 +1,4 @@
-define("utils", ["pixelLayer", "shared"], (PixelLayer, shared) => {
+define("utils", ["shared"], (shared) => {
 
   const gridWidth = Number(document.getElementById("width-input").value);
   const gridHeight = Number(document.getElementById("height-input").value);
